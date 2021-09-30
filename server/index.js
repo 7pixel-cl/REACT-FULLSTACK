@@ -1,9 +1,15 @@
 const express = require('express')
-const app = express()
-
+const app = express();
+const cors = require("cors");
+app.use(express.json());
+app.use(cors());
 
 //Usado para cargar los modelos en la base de datos
 const db = require('./models')
+
+//Routers
+const postRouter = require('./routes/Posts')
+  app.use("/posts",postRouter);
 
 db.sequelize.sync().then(() => {
 
